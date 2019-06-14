@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.core.model.City;
-import com.mohamedmenasy.backbasetask.features.main.view.CityFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
 
@@ -17,11 +16,15 @@ import java.util.List;
 public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerViewAdapter.ViewHolder> {
 
     private final List<City> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final OnListClickInteractionListener mListener;
 
-    public CityRecyclerViewAdapter(List<City> items, OnListFragmentInteractionListener listener) {
+    public CityRecyclerViewAdapter(List<City> items, OnListClickInteractionListener listener) {
         mValues = items;
         mListener = listener;
+    }
+
+    public interface OnListClickInteractionListener {
+        void onListClickInteractionListener(City item);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
             if (null != mListener) {
                 // Notify the active callbacks interface (the activity, if the
                 // fragment is attached to one) that an item has been selected.
-                mListener.onListFragmentInteraction(holder.mItem);
+                mListener.onListClickInteractionListener(holder.mItem);
             }
         });
     }

@@ -1,21 +1,14 @@
 package com.mohamedmenasy.backbasetask.core.view;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.mohamedmenasy.backbasetask.R;
-import com.mohamedmenasy.backbasetask.core.model.City;
-import com.mohamedmenasy.backbasetask.features.main.view.CityFragment;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.mohamedmenasy.backbasetask.R;
 
-public class MainActivity extends AppCompatActivity implements CityFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +19,10 @@ public class MainActivity extends AppCompatActivity implements CityFragment.OnLi
     }
 
     @Override
-    public void onListFragmentInteraction(City item) {
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

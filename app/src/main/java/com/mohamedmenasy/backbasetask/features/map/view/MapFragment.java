@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -48,6 +50,12 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_map, container, false);
+        ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+
+        //TODO : handel the landscape mode
+
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayShowHomeEnabled(true);
 
         mapView = v.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -65,6 +73,16 @@ public class MapFragment extends Fragment {
 
 
         return v;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+
+
+        mActionBar.setDisplayHomeAsUpEnabled(false);
+        mActionBar.setDisplayShowHomeEnabled(false);
     }
 
     @Override

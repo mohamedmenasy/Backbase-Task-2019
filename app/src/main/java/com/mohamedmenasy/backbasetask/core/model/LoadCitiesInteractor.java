@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LoadCitiesInteractor {
-   public interface OnFinishedListener {
+    public interface OnFinishedListener {
         void onFinished(List<City> items);
     }
 
@@ -15,11 +15,11 @@ public class LoadCitiesInteractor {
     }
 
     private List<City> createArrayList() {
-       //TODO : delete this dummy data and load the actual data
+        //TODO : delete this dummy data and load the actual data
         return Arrays.asList(
-                new City("Cairo", "EG", 1, new Coord(30.0444191, 31.2335109)),
-                new City("Alex", "EG", 2, new Coord(30.0444191, 31.2335109)),
-                new City("Cairo", "EG", 3, new Coord(30.0444191, 31.2335109))
+                new City("Cairo", "EG", 1, new Coord(31.2335109, 30.0444191)),
+                new City("Alex", "EG", 2, new Coord(31.2335109, 30.0444191)),
+                new City("Cairo", "EG", 3, new Coord(31.2335109, 30.0444191))
 
         );
     }

@@ -12,19 +12,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.core.model.City;
 import com.mohamedmenasy.backbasetask.core.model.LoadCitiesInteractor;
+import com.mohamedmenasy.backbasetask.features.map.view.MapFragment;
 
 import java.util.List;
 
-public class CityFragment extends Fragment implements MainView {
+public class CityFragment extends Fragment implements MainView, CityRecyclerViewAdapter.OnListClickInteractionListener {
 
-    private OnListFragmentInteractionListener mListener;
+    private CityRecyclerViewAdapter.OnListClickInteractionListener mListener;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
     private MainPresenter presenter;
@@ -44,7 +48,7 @@ public class CityFragment extends Fragment implements MainView {
         progressDialog.setTitle(R.string.loading);
         progressDialog.setCancelable(false);
         presenter = new MainPresenter(this, new LoadCitiesInteractor());
-
+        mListener = this;
     }
 
     @Override
@@ -63,17 +67,6 @@ public class CityFragment extends Fragment implements MainView {
         return view;
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onDetach() {
@@ -119,9 +112,6 @@ public class CityFragment extends Fragment implements MainView {
 
     }
 
-    public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(City item);
-    }
 
     private TextWatcher filterTextWatcher = new TextWatcher() {
 
@@ -142,4 +132,15 @@ public class CityFragment extends Fragment implements MainView {
 
     };
 
+    @Override
+    public void onListClickInteractionListener(City item) {
+        MapFragment mapFragment = MapFragment.newInstance(new LatLng(item.getCoord().getLat(), item.getCoord().getLon()));
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.contents, mapFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
 }
