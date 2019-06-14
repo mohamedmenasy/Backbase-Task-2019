@@ -15,10 +15,12 @@ public class LoadCitiesInteractor {
     }
 
     private List<City> createArrayList() {
+       //TODO : delete this dummy data and load the actual data
         return Arrays.asList(
-                new City(),
-                new City(),
-                new City()
+                new City("Cairo", "EG", 1, new Coord(30.0444191, 31.2335109)),
+                new City("Alex", "EG", 2, new Coord(30.0444191, 31.2335109)),
+                new City("Cairo", "EG", 3, new Coord(30.0444191, 31.2335109))
+
         );
     }
 }

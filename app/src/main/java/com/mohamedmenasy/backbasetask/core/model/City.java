@@ -1,10 +1,11 @@
 package com.mohamedmenasy.backbasetask.core.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
-
-public class City implements Serializable {
+public class City implements Parcelable {
     @JsonProperty("country")
     private String country;
     @JsonProperty("name")
@@ -13,6 +14,13 @@ public class City implements Serializable {
     private Integer id;
     @JsonProperty("coord")
     private Coord coord;
+
+    public City(String country, String name, Integer id, Coord coord) {
+        this.country = country;
+        this.name = name;
+        this.id = id;
+        this.coord = coord;
+    }
 
     @JsonProperty("country")
     public String getCountry() {
@@ -53,4 +61,36 @@ public class City implements Serializable {
     public void setCoord(Coord coord) {
         this.coord = coord;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.country);
+        dest.writeString(this.name);
+        dest.writeValue(this.id);
+        dest.writeParcelable(this.coord, flags);
+    }
+
+    protected City(Parcel in) {
+        this.country = in.readString();
+        this.name = in.readString();
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.coord = in.readParcelable(Coord.class.getClassLoader());
+    }
+
+    public static final Creator<City> CREATOR = new Creator<City>() {
+        @Override
+        public City createFromParcel(Parcel source) {
+            return new City(source);
+        }
+
+        @Override
+        public City[] newArray(int size) {
+            return new City[size];
+        }
+    };
 }

@@ -27,15 +27,15 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_city, parent, false);
+                .inflate(R.layout.list_item_city, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getId());
-        holder.mContentView.setText(mValues.get(position).getCountry());
+        holder.mTitleTV.setText(mValues.get(position).getName() + ", " + mValues.get(position).getCountry());
+        holder.mSubTitleTV.setText(mValues.get(position).getCoord().getLat() + ", " + mValues.get(position).getCoord().getLon());
 
         holder.mView.setOnClickListener(v -> {
             if (null != mListener) {
@@ -53,20 +53,15 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mTitleTV;
+        public final TextView mSubTitleTV;
         public City mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            mTitleTV = view.findViewById(R.id.titleTV);
+            mSubTitleTV = view.findViewById(R.id.subTitleTV);
         }
     }
 }
