@@ -1,9 +1,10 @@
-package com.mohamedmenasy.backbasetask;
+package com.mohamedmenasy.backbasetask.core.view;
 
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.mohamedmenasy.backbasetask.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
