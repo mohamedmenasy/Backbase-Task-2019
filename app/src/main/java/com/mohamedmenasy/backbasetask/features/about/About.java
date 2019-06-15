@@ -1,3 +1,5 @@
+package com.mohamedmenasy.backbasetask.features.about;
+
 /**
  * Created by Backbase R&D B.V on 28/06/2018.
  * MVP contract for AboutActivity
