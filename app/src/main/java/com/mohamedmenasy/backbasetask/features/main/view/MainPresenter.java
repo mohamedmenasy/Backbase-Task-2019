@@ -6,7 +6,7 @@ import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.core.model.City;
 import com.mohamedmenasy.backbasetask.core.model.LoadCitiesInteractor;
 import com.mohamedmenasy.backbasetask.core.model.SearchForCitiesInteractor;
-import com.mohamedmenasy.backbasetask.core.model.trie.SortedMapTrie;
+import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class MainPresenter {
     private LoadCitiesInteractor loadCitiesInteractor;
     private SearchForCitiesInteractor searchForCitiesInteractor;
     private Context context;
-    private SortedMapTrie<City> trie = new SortedMapTrie<>();
+    private Trie<City> trie = new Trie<>();
 
     MainPresenter(Context context, MainView mainView, LoadCitiesInteractor loadCitiesInteractor, SearchForCitiesInteractor searchForCitiesInteractor) {
         this.mainView = mainView;
