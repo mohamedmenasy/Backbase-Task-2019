@@ -74,26 +74,33 @@ public class MapFragment extends Fragment {
             map = googleMap;
             map.getUiSettings().setMyLocationButtonEnabled(false);
             MapsInitializer.initialize(getActivity());
-            if (mLocation != null) {
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLocation, 10);
-                map.animateCamera(cameraUpdate);
-                map.addMarker(new MarkerOptions()
-                        .position(mLocation)
-                        .title(name));
-            }
+            setMarker(name, mLocation);
         });
 
         return v;
+    }
+
+    private void setMarker(String markerName, LatLng location) {
+        if (mLocation != null) {
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 10);
+            map.animateCamera(cameraUpdate);
+            map.addMarker(new MarkerOptions()
+                    .position(location)
+                    .title(markerName));
+        }
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        int orientation = getResources().getConfiguration().orientation;
 
-
-        mActionBar.setDisplayHomeAsUpEnabled(false);
-        mActionBar.setDisplayShowHomeEnabled(false);
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mActionBar.setDisplayHomeAsUpEnabled(false);
+            mActionBar.setDisplayShowHomeEnabled(false);
+        }
     }
 
     @Override

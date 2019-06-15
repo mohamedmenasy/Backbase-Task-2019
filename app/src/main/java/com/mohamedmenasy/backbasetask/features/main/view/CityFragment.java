@@ -18,7 +18,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.core.model.City;
 import com.mohamedmenasy.backbasetask.core.model.LoadCitiesInteractor;
@@ -27,13 +33,13 @@ import com.mohamedmenasy.backbasetask.features.map.view.MapFragment;
 
 import java.util.List;
 
-public class CityFragment extends Fragment implements MainView, CityRecyclerViewAdapter.OnListClickInteractionListener {
+public class CityFragment extends Fragment implements MainView {
 
-    private CityRecyclerViewAdapter.OnListClickInteractionListener mListener;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
     private MainPresenter presenter;
     private EditText searchET;
+    private CityRecyclerViewAdapter adapter;
 
     public CityFragment() {
     }
@@ -45,11 +51,13 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle(R.string.loading);
         progressDialog.setCancelable(false);
         presenter = new MainPresenter(getActivity(), this, new LoadCitiesInteractor(), new SearchForCitiesInteractor());
-        mListener = this;
+
     }
 
     @Override
@@ -72,7 +80,6 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -101,7 +108,7 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
     @Override
     public void setItems(List<City> items) {
         getActivity().runOnUiThread(() -> {
-            CityRecyclerViewAdapter adapter = new CityRecyclerViewAdapter(items, mListener);
+            adapter = new CityRecyclerViewAdapter(items, item -> openMapFragment(item));
 
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -136,17 +143,34 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
 
     };
 
-    @Override
-    public void onListClickInteractionListener(City item) {
+
+    private void openMapFragment(City item) {
         String name = item.getName() + ", " + item.getCountry();
         LatLng location = new LatLng(item.getCoord().getLat(), item.getCoord().getLon());
-        MapFragment mapFragment = MapFragment.newInstance(name, location);
+        View currentMapFragment = getActivity().findViewById(R.id.mapfrag);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.contents, mapFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        if (currentMapFragment != null && currentMapFragment.getVisibility() == View.VISIBLE) {
 
+            MapView mapView = getActivity().findViewById(R.id.mapView);
+
+            mapView.getMapAsync(googleMap -> {
+                GoogleMap map = googleMap;
+                map.getUiSettings().setMyLocationButtonEnabled(false);
+                MapsInitializer.initialize(getActivity());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 10);
+                map.animateCamera(cameraUpdate);
+                map.clear();
+                map.addMarker(new MarkerOptions()
+                        .position(location)
+                        .title(name));
+            });
+        } else {
+            MapFragment mapFragment = MapFragment.newInstance(name, location);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.contents, mapFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
     }
 }
