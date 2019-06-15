@@ -1,5 +1,6 @@
 package com.mohamedmenasy.backbasetask.features.map.view;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +16,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.mohamedmenasy.backbasetask.R;
 
 
 public class MapFragment extends Fragment {
     private static final String ARG_LATLNG = "LatLng";
+    private static final String ARG_NAME = "name";
 
     private LatLng mLocation;
+    private String name;
 
     private MapView mapView;
     private GoogleMap map;
@@ -29,10 +33,11 @@ public class MapFragment extends Fragment {
     public MapFragment() {
     }
 
-    public static MapFragment newInstance(LatLng mLocation) {
+    public static MapFragment newInstance(String name, LatLng mLocation) {
         MapFragment fragment = new MapFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_LATLNG, mLocation);
+        args.putString(ARG_NAME, name);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,6 +47,7 @@ public class MapFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mLocation = getArguments().getParcelable(ARG_LATLNG);
+            name = getArguments().getString(ARG_NAME);
         }
     }
 
@@ -50,12 +56,16 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_map, container, false);
-        ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
-        //TODO : handel the landscape mode
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setDisplayShowHomeEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.setDisplayShowHomeEnabled(true);
+            mActionBar.setTitle(name);
+        }
+
 
         mapView = v.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -67,6 +77,9 @@ public class MapFragment extends Fragment {
             if (mLocation != null) {
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLocation, 10);
                 map.animateCamera(cameraUpdate);
+                map.addMarker(new MarkerOptions()
+                        .position(mLocation)
+                        .title(name));
             }
         });
 

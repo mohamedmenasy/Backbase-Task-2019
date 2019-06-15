@@ -138,7 +138,9 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
 
     @Override
     public void onListClickInteractionListener(City item) {
-        MapFragment mapFragment = MapFragment.newInstance(new LatLng(item.getCoord().getLat(), item.getCoord().getLon()));
+        String name = item.getName() + ", " + item.getCountry();
+        LatLng location = new LatLng(item.getCoord().getLat(), item.getCoord().getLon());
+        MapFragment mapFragment = MapFragment.newInstance(name, location);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
