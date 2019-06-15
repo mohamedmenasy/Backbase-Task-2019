@@ -1,5 +1,7 @@
 package com.mohamedmenasy.backbasetask.features.main.view;
 
+import android.content.Context;
+
 import com.mohamedmenasy.backbasetask.core.model.City;
 import com.mohamedmenasy.backbasetask.core.model.LoadCitiesInteractor;
 
@@ -8,10 +10,11 @@ import java.util.List;
 public class MainPresenter {
     private MainView mainView;
     private LoadCitiesInteractor loadCitiesInteractor;
-
-    MainPresenter(MainView mainView, LoadCitiesInteractor loadCitiesInteractor) {
+    private Context context;
+    MainPresenter(Context context, MainView mainView, LoadCitiesInteractor loadCitiesInteractor) {
         this.mainView = mainView;
         this.loadCitiesInteractor = loadCitiesInteractor;
+        this.context = context;
     }
 
     void onResume() {
@@ -19,7 +22,7 @@ public class MainPresenter {
             mainView.showProgress();
         }
 
-        loadCitiesInteractor.findItems(this::onFinished);
+        loadCitiesInteractor.findItems(context, this::onFinished);
     }
 
     void onItemClicked(String item) {

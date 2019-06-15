@@ -3,6 +3,7 @@ package com.mohamedmenasy.backbasetask.core.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Coord implements Parcelable {
@@ -11,7 +12,8 @@ public class Coord implements Parcelable {
     @JsonProperty("lat")
     private Double lat;
 
-    public Coord(Double lon, Double lat) {
+    @JsonCreator
+    public Coord(@JsonProperty("lon") Double lon, @JsonProperty("lat") Double lat) {
         this.lon = lon;
         this.lat = lat;
     }

@@ -8,19 +8,15 @@ import java.util.List;
 
 public class MapPresenter {
     private MainView mainView;
-    private LoadCitiesInteractor loadCitiesInteractor;
 
-    MapPresenter(MainView mainView, LoadCitiesInteractor loadCitiesInteractor) {
+    MapPresenter(MainView mainView) {
         this.mainView = mainView;
-        this.loadCitiesInteractor = loadCitiesInteractor;
     }
 
     void onResume() {
         if (mainView != null) {
             mainView.showProgress();
         }
-
-        loadCitiesInteractor.findItems(this::onFinished);
     }
 
     void onItemClicked(String item) {

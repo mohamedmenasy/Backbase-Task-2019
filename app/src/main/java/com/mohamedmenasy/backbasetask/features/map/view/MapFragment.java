@@ -65,12 +65,10 @@ public class MapFragment extends Fragment {
             map.getUiSettings().setMyLocationButtonEnabled(false);
             MapsInitializer.initialize(getActivity());
             if (mLocation != null) {
-
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLocation, 10);
                 map.animateCamera(cameraUpdate);
             }
         });
-
 
         return v;
     }

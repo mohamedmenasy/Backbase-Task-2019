@@ -1,8 +1,15 @@
 package com.mohamedmenasy.backbasetask.core.model;
 
+import android.content.Context;
 import android.os.Handler;
 
-import java.util.Arrays;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.mohamedmenasy.backbasetask.R;
+
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class LoadCitiesInteractor {
@@ -10,17 +17,23 @@ public class LoadCitiesInteractor {
         void onFinished(List<City> items);
     }
 
-    public void findItems(final OnFinishedListener listener) {
-        new Handler().postDelayed(() -> listener.onFinished(createArrayList()), 2000);
+    public void findItems(Context context, final OnFinishedListener listener) {
+        new Handler().postDelayed(() -> listener.onFinished(getListOfCities(context)), 2000);
     }
 
-    private List<City> createArrayList() {
-        //TODO : delete this dummy data and load the actual data
-        return Arrays.asList(
-                new City("Cairo", "EG", 1, new Coord(31.2335109, 30.0444191)),
-                new City("Alex", "EG", 2, new Coord(31.2335109, 30.0444191)),
-                new City("Cairo", "EG", 3, new Coord(31.2335109, 30.0444191))
-
+    private List<City> getListOfCities(Context context) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(
+                SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true
         );
+        List<City> cities = null;
+        try {
+            cities = mapper.readValue(context.getResources().openRawResource(R.raw.cities), new TypeReference<List<City>>() {});
+            Collections.sort(cities, (data1, data2) -> data1.getName().compareToIgnoreCase(data2.getName()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cities;
+
     }
 }

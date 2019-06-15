@@ -47,7 +47,7 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle(R.string.loading);
         progressDialog.setCancelable(false);
-        presenter = new MainPresenter(this, new LoadCitiesInteractor());
+        presenter = new MainPresenter(getActivity(), this, new LoadCitiesInteractor());
         mListener = this;
     }
 
