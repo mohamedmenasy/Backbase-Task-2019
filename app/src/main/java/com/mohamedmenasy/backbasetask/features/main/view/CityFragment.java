@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.core.model.City;
 import com.mohamedmenasy.backbasetask.core.model.LoadCitiesInteractor;
+import com.mohamedmenasy.backbasetask.core.model.SearchForCitiesInteractor;
 import com.mohamedmenasy.backbasetask.features.map.view.MapFragment;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle(R.string.loading);
         progressDialog.setCancelable(false);
-        presenter = new MainPresenter(getActivity(), this, new LoadCitiesInteractor());
+        presenter = new MainPresenter(getActivity(), this, new LoadCitiesInteractor(), new SearchForCitiesInteractor());
         mListener = this;
     }
 
@@ -93,15 +94,18 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
 
     @Override
     public void hideProgress() {
-        progressDialog.hide();
 
+        getActivity().runOnUiThread(() -> progressDialog.hide());
     }
 
     @Override
     public void setItems(List<City> items) {
-        CityRecyclerViewAdapter adapter = new CityRecyclerViewAdapter(items, mListener);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        getActivity().runOnUiThread(() -> {
+            CityRecyclerViewAdapter adapter = new CityRecyclerViewAdapter(items, mListener);
+
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        });
 
 
     }
@@ -127,7 +131,7 @@ public class CityFragment extends Fragment implements MainView, CityRecyclerView
         @Override
         public void onTextChanged(CharSequence s, int start, int before,
                                   int count) {
-            // adapter.getFilter().filter(s);
+            presenter.search(s.toString());
         }
 
     };
