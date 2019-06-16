@@ -16,6 +16,7 @@ public class MainPresenter {
     private SearchForCitiesInteractor searchForCitiesInteractor;
     private Context context;
     private Trie<City> trie = new Trie<>();
+    private boolean isDataLoaded = false;
 
     MainPresenter(Context context, MainView mainView, LoadCitiesInteractor loadCitiesInteractor, SearchForCitiesInteractor searchForCitiesInteractor) {
         this.mainView = mainView;
@@ -28,8 +29,9 @@ public class MainPresenter {
         if (mainView != null) {
             mainView.showProgress();
         }
-
-        loadCitiesInteractor.loadItems(context.getResources().openRawResource(R.raw.cities), this::onFinished);
+        if (!isDataLoaded) {
+            loadCitiesInteractor.loadItems(context.getResources().openRawResource(R.raw.cities), this::onFinished);
+        }
     }
 
     void onItemClicked(String item) {
@@ -50,6 +52,8 @@ public class MainPresenter {
                 trie.insert(c.getName(), c);
             }
             mainView.hideProgress();
+
+            isDataLoaded = true;
         }
     }
 

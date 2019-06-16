@@ -96,7 +96,8 @@ public class CityFragment extends Fragment implements MainView {
 
     @Override
     public void showProgress() {
-        progressDialog.show();
+
+        getActivity().runOnUiThread(() -> progressDialog.show());
     }
 
     @Override
