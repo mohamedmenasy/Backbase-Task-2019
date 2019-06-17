@@ -82,6 +82,51 @@ public class Trie<V> {
         }
     }
 
+    public int size() {
+        return size(root);
+    }
+
+    public void deleteKey(final String key) {
+        if (key == null) {
+            return;
+        }
+        deleteKey(root, trimLowercaseString(key), 0);
+    }
+
+    private boolean deleteKey(TreeMapNode<V> node, final String word, int index) {
+        if (word == null) {
+            return false;
+        }
+        if (index == word.length()) {
+            if (node.isKey()) {
+                node.setKey(false);
+                return true;
+            } else {
+                // No word found
+                return false;
+            }
+        }
+        for (final TreeMapNode<V> child : node.getChildren()) {
+            if (child.getChar() == word.charAt(index)) {
+                if (deleteKey(child, word, index + 1) && child.isEnd() && !child.isKey()) {
+                    node.removeChild(child.getChar());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private int size(final TreeMapNode<V> node) {
+        int sum = 0;
+        if (node.isKey()) {
+            sum = 1;
+        }
+        for (final TreeMapNode<V> child : node.getChildren()) {
+            sum += size(child);
+        }
+        return sum;
+    }
 
     private String trimLowercaseString(String key) {
         return key.toLowerCase().trim();

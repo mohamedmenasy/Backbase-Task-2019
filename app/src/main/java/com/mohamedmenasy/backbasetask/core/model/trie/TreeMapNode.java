@@ -85,4 +85,25 @@ public class TreeMapNode<V> {
         return children.values().isEmpty();
     }
 
+    public char getChar() {
+        return character;
+    }
+
+    public void removeChild(final char character) {
+        TreeMapNode<V> removedNode = children.remove(character);
+        if (removedNode != null) {
+            removedNode.clear();
+            removedNode = null;
+        }
+    }
+
+    public void clear() {
+        value = null;
+        key = false;
+        for (TreeMapNode<V> node : getChildren()) {
+            node.clear();
+        }
+    }
+
+
 }
