@@ -1,4 +1,4 @@
-package com.mohamedmenasy.backbasetask.core.model;
+package com.mohamedmenasy.backbasetask.features.main.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

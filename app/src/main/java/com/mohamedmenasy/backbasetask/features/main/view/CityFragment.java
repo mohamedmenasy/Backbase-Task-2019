@@ -26,9 +26,9 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mohamedmenasy.backbasetask.R;
-import com.mohamedmenasy.backbasetask.core.model.City;
-import com.mohamedmenasy.backbasetask.core.model.LoadCitiesInteractor;
-import com.mohamedmenasy.backbasetask.core.model.SearchForCitiesInteractor;
+import com.mohamedmenasy.backbasetask.features.main.data.City;
+import com.mohamedmenasy.backbasetask.features.main.data.LoadCitiesInteractor;
+import com.mohamedmenasy.backbasetask.features.main.data.SearchForCitiesInteractor;
 import com.mohamedmenasy.backbasetask.features.map.view.MapFragment;
 
 import java.util.List;

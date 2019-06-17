@@ -1,6 +1,6 @@
 package com.mohamedmenasy.backbasetask.features.main.view;
 
-import com.mohamedmenasy.backbasetask.core.model.City;
+import com.mohamedmenasy.backbasetask.features.main.data.City;
 
 import java.util.List;
 

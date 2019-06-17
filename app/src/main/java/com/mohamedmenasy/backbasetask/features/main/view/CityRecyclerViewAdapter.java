@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mohamedmenasy.backbasetask.R;
-import com.mohamedmenasy.backbasetask.core.model.City;
+import com.mohamedmenasy.backbasetask.features.main.data.City;
 
 import java.util.List;
 
