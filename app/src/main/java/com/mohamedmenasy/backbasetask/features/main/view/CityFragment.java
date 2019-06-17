@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -89,6 +90,11 @@ public class CityFragment extends Fragment implements MainView {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         presenter.onDestroy();
         super.onDestroy();
@@ -146,6 +152,7 @@ public class CityFragment extends Fragment implements MainView {
 
 
     private void openMapFragment(City item) {
+        hideKeyboard();
         String name = item.getName() + ", " + item.getCountry();
         LatLng location = new LatLng(item.getCoord().getLat(), item.getCoord().getLon());
         View currentMapFragment = getActivity().findViewById(R.id.mapfrag);
@@ -173,5 +180,10 @@ public class CityFragment extends Fragment implements MainView {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
     }
 }
