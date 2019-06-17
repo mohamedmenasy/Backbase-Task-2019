@@ -69,12 +69,6 @@ public class MapFragment extends Fragment {
             mActionBar.setTitle(name);
         }
 
-        FloatingActionButton infoFab = v.findViewById(R.id.infoFab);
-        infoFab.setOnClickListener(v1 -> {
-            getActivity().startActivity(new Intent(getActivity(), AboutActivity.class));
-        });
-
-
         mapView = v.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 

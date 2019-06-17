@@ -1,42 +1,41 @@
 package com.mohamedmenasy.backbasetask.features.map.view;
 
-import com.mohamedmenasy.backbasetask.features.main.view.MainView;
+import com.mohamedmenasy.backbasetask.features.main.view.CityView;
 import com.mohamedmenasy.backbasetask.core.model.City;
-import com.mohamedmenasy.backbasetask.core.model.LoadCitiesInteractor;
 
 import java.util.List;
 
 public class MapPresenter {
-    private MainView mainView;
+    private CityView mainCityView;
 
-    MapPresenter(MainView mainView) {
-        this.mainView = mainView;
+    MapPresenter(CityView mainCityView) {
+        this.mainCityView = mainCityView;
     }
 
     void onResume() {
-        if (mainView != null) {
-            mainView.showProgress();
+        if (mainCityView != null) {
+            mainCityView.showProgress();
         }
     }
 
     void onItemClicked(String item) {
-        if (mainView != null) {
-            mainView.showMessage(String.format("%s clicked", item));
+        if (mainCityView != null) {
+            mainCityView.showMessage(String.format("%s clicked", item));
         }
     }
 
     void onDestroy() {
-        mainView = null;
+        mainCityView = null;
     }
 
     public void onFinished(List<City> items) {
-        if (mainView != null) {
-            mainView.setItems(items);
-            mainView.hideProgress();
+        if (mainCityView != null) {
+            mainCityView.setItems(items);
+            mainCityView.hideProgress();
         }
     }
 
-    public MainView getMainView() {
-        return mainView;
+    public CityView getMainCityView() {
+        return mainCityView;
     }
 }

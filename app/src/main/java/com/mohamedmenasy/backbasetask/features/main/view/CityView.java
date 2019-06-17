@@ -4,7 +4,7 @@ import com.mohamedmenasy.backbasetask.core.model.City;
 
 import java.util.List;
 
-public interface MainView {
+public interface CityView {
     void showProgress();
 
     void hideProgress();

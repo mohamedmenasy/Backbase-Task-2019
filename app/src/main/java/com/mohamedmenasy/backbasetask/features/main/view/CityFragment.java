@@ -1,12 +1,12 @@
 package com.mohamedmenasy.backbasetask.features.main.view;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,11 +33,11 @@ import com.mohamedmenasy.backbasetask.features.map.view.MapFragment;
 
 import java.util.List;
 
-public class CityFragment extends Fragment implements MainView {
+public class CityFragment extends Fragment implements CityView {
 
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
-    private MainPresenter presenter;
+    private CityPresenter presenter;
     private EditText searchET;
     private CityRecyclerViewAdapter adapter;
 
@@ -57,19 +56,19 @@ public class CityFragment extends Fragment implements MainView {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle(R.string.loading);
         progressDialog.setCancelable(false);
-        presenter = new MainPresenter(getActivity(), this, new LoadCitiesInteractor(), new SearchForCitiesInteractor());
+        presenter = new CityPresenter(getActivity(), this, new LoadCitiesInteractor(), new SearchForCitiesInteractor());
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_city_list, container, false);
+    public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                          Bundle savedInstanceState) {
+        android.view.View view = inflater.inflate(R.layout.fragment_city_list, container, false);
 
         Context context = view.getContext();
         recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         searchET = view.findViewById(R.id.searchET);
         searchET.addTextChangedListener(filterTextWatcher);
@@ -115,7 +114,7 @@ public class CityFragment extends Fragment implements MainView {
     @Override
     public void setItems(List<City> items) {
         getActivity().runOnUiThread(() -> {
-            adapter = new CityRecyclerViewAdapter(items, item -> openMapFragment(item));
+            adapter = new CityRecyclerViewAdapter(items, item -> openMapFragment(item), item -> showCityInfo(item));
 
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -155,9 +154,9 @@ public class CityFragment extends Fragment implements MainView {
         hideKeyboard();
         String name = item.getName() + ", " + item.getCountry();
         LatLng location = new LatLng(item.getCoord().getLat(), item.getCoord().getLon());
-        View currentMapFragment = getActivity().findViewById(R.id.mapfrag);
+        android.view.View currentMapFragment = getActivity().findViewById(R.id.mapfrag);
 
-        if (currentMapFragment != null && currentMapFragment.getVisibility() == View.VISIBLE) {
+        if (currentMapFragment != null && currentMapFragment.getVisibility() == android.view.View.VISIBLE) {
 
             MapView mapView = getActivity().findViewById(R.id.mapView);
 
@@ -180,6 +179,16 @@ public class CityFragment extends Fragment implements MainView {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
+    }
+
+    private void showCityInfo(City item) {
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle(item.getName() + ", " + item.getCountry())
+                .setMessage(item.toString())
+                .setNeutralButton(R.string.ok, null)
+                .show();
+
     }
 
     private void hideKeyboard() {

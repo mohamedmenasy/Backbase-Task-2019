@@ -1,12 +1,15 @@
 package com.mohamedmenasy.backbasetask.core.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.mohamedmenasy.backbasetask.R;
+import com.mohamedmenasy.backbasetask.features.about.AboutActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,9 +22,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.action_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

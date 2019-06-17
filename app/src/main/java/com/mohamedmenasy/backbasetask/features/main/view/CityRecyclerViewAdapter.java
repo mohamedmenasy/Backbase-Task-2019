@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mohamedmenasy.backbasetask.R;
@@ -16,15 +17,21 @@ import java.util.List;
 public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerViewAdapter.ViewHolder> {
 
     private final List<City> mValues;
-    private final OnListClickInteractionListener mListener;
+    private final OnListClickInteractionListener onListClickInteractionListener;
+    private final OnInfoClickInteractionListener onInfoClickInteractionListener;
 
-    public CityRecyclerViewAdapter(List<City> items, OnListClickInteractionListener listener) {
+    public CityRecyclerViewAdapter(List<City> items, OnListClickInteractionListener onListClickInteractionListener, OnInfoClickInteractionListener onInfoClickInteractionListener) {
         mValues = items;
-        mListener = listener;
+        this.onListClickInteractionListener = onListClickInteractionListener;
+        this.onInfoClickInteractionListener = onInfoClickInteractionListener;
     }
 
     public interface OnListClickInteractionListener {
         void onListClickInteractionListener(City item);
+    }
+
+    public interface OnInfoClickInteractionListener {
+        void onClick(City item);
     }
 
     @Override
@@ -41,10 +48,13 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
         holder.mSubTitleTV.setText(mValues.get(position).getCoord().getLat() + ", " + mValues.get(position).getCoord().getLon());
 
         holder.mView.setOnClickListener(v -> {
-            if (null != mListener) {
-                // Notify the active callbacks interface (the activity, if the
-                // fragment is attached to one) that an item has been selected.
-                mListener.onListClickInteractionListener(holder.mItem);
+            if (null != onListClickInteractionListener) {
+                onListClickInteractionListener.onListClickInteractionListener(holder.mItem);
+            }
+        });
+        holder.mInfoIV.setOnClickListener(v -> {
+            if (null != onInfoClickInteractionListener) {
+                onInfoClickInteractionListener.onClick(holder.mItem);
             }
         });
     }
@@ -55,16 +65,18 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mTitleTV;
-        public final TextView mSubTitleTV;
-        public City mItem;
+        final View mView;
+        final TextView mTitleTV;
+        final TextView mSubTitleTV;
+        final AppCompatImageView mInfoIV;
+        City mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mTitleTV = view.findViewById(R.id.titleTV);
             mSubTitleTV = view.findViewById(R.id.subTitleTV);
+            mInfoIV = view.findViewById(R.id.infoIV);
         }
     }
 }

@@ -3,6 +3,8 @@ package com.mohamedmenasy.backbasetask.core.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -95,4 +97,14 @@ public class City implements Parcelable {
             return new City[size];
         }
     };
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Id : " + getId() + "\n" +
+                "County : " + getCountry() + "\n" +
+                "City : " + getName() + "\n" +
+                "Longitude : " + getCoord().getLon() + "\n" +
+                "Latitude : " + getCoord().getLat() + "\n";
+    }
 }

@@ -10,62 +10,56 @@ import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 
 import java.util.List;
 
-public class MainPresenter {
-    private MainView mainView;
+public class CityPresenter {
+    private CityView mainCityView;
     private LoadCitiesInteractor loadCitiesInteractor;
     private SearchForCitiesInteractor searchForCitiesInteractor;
     private Context context;
     private Trie<City> trie = new Trie<>();
     private boolean isDataLoaded = false;
 
-    MainPresenter(Context context, MainView mainView, LoadCitiesInteractor loadCitiesInteractor, SearchForCitiesInteractor searchForCitiesInteractor) {
-        this.mainView = mainView;
+    CityPresenter(Context context, CityView mainCityView, LoadCitiesInteractor loadCitiesInteractor, SearchForCitiesInteractor searchForCitiesInteractor) {
+        this.mainCityView = mainCityView;
         this.loadCitiesInteractor = loadCitiesInteractor;
         this.context = context;
         this.searchForCitiesInteractor = searchForCitiesInteractor;
     }
 
     void onResume() {
-        if (mainView != null) {
-            mainView.showProgress();
-        }
         if (!isDataLoaded) {
+            if (mainCityView != null) {
+                mainCityView.showProgress();
+            }
             loadCitiesInteractor.loadItems(context.getResources().openRawResource(R.raw.cities), this::onFinished);
         }
     }
 
-    void onItemClicked(String item) {
-        if (mainView != null) {
-            mainView.showMessage(String.format("%s clicked", item));
-        }
-    }
-
     void onDestroy() {
-        mainView = null;
+        mainCityView = null;
     }
 
     public void onFinished(List<City> items) {
-        if (mainView != null) {
+        if (mainCityView != null) {
 
-            mainView.setItems(items);
+            mainCityView.setItems(items);
             for (City c : items) {
                 trie.insert(c.getName(), c);
             }
-            mainView.hideProgress();
+            mainCityView.hideProgress();
 
             isDataLoaded = true;
         }
     }
 
     public void onSearchFinished(List<City> items) {
-        if (mainView != null) {
-            mainView.setItems(items);
-            mainView.hideProgress();
+        if (mainCityView != null) {
+            mainCityView.setItems(items);
+            mainCityView.hideProgress();
         }
     }
 
-    public MainView getMainView() {
-        return mainView;
+    public CityView getMainCityView() {
+        return mainCityView;
     }
 
     public void search(String keyword) {
