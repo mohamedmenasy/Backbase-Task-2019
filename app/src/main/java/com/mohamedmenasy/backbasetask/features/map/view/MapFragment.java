@@ -1,5 +1,6 @@
 package com.mohamedmenasy.backbasetask.features.map.view;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +18,9 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mohamedmenasy.backbasetask.R;
+import com.mohamedmenasy.backbasetask.features.about.AboutActivity;
 
 
 public class MapFragment extends Fragment {
@@ -65,6 +68,11 @@ public class MapFragment extends Fragment {
             mActionBar.setDisplayShowHomeEnabled(true);
             mActionBar.setTitle(name);
         }
+
+        FloatingActionButton infoFab = v.findViewById(R.id.infoFab);
+        infoFab.setOnClickListener(v1 -> {
+            getActivity().startActivity(new Intent(getActivity(), AboutActivity.class));
+        });
 
 
         mapView = v.findViewById(R.id.mapView);
