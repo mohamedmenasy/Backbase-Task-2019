@@ -1,8 +1,8 @@
-package com.mohamedmenasy.backbasetask.features.main.view;
+package com.mohamedmenasy.backbasetask.features.clitylist.view;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,9 +26,10 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mohamedmenasy.backbasetask.R;
-import com.mohamedmenasy.backbasetask.features.main.data.City;
-import com.mohamedmenasy.backbasetask.features.main.data.LoadCitiesInteractor;
-import com.mohamedmenasy.backbasetask.features.main.data.SearchForCitiesInteractor;
+import com.mohamedmenasy.backbasetask.core.data.City;
+import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCitiesInteractor;
+import com.mohamedmenasy.backbasetask.features.clitylist.data.SearchForCitiesInteractor;
+import com.mohamedmenasy.backbasetask.features.info.view.InfoActivity;
 import com.mohamedmenasy.backbasetask.features.map.view.MapFragment;
 
 import java.util.List;
@@ -183,11 +184,15 @@ public class CityFragment extends Fragment implements CityView {
 
     private void showCityInfo(City item) {
 
-        new AlertDialog.Builder(getActivity())
+        Intent intent = new Intent(getActivity(), InfoActivity.class);
+        intent.putExtra(InfoActivity.INTENT_KEY, item);
+        getActivity().startActivity(intent);
+
+        /*new AlertDialog.Builder(getActivity())
                 .setTitle(item.getName() + ", " + item.getCountry())
                 .setMessage(item.toString())
                 .setNeutralButton(R.string.ok, null)
-                .show();
+                .show();*/
 
     }
 

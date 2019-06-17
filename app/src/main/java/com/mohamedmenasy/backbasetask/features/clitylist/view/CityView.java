@@ -1,6 +1,6 @@
-package com.mohamedmenasy.backbasetask.features.main.view;
+package com.mohamedmenasy.backbasetask.features.clitylist.view;
 
-import com.mohamedmenasy.backbasetask.features.main.data.City;
+import com.mohamedmenasy.backbasetask.core.data.City;
 
 import java.util.List;
 

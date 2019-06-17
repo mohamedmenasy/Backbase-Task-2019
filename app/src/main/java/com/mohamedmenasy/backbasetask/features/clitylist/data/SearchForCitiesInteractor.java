@@ -1,7 +1,8 @@
-package com.mohamedmenasy.backbasetask.features.main.data;
+package com.mohamedmenasy.backbasetask.features.clitylist.data;
 
 import android.os.Handler;
 
+import com.mohamedmenasy.backbasetask.core.data.City;
 import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 
 import java.util.List;

@@ -1,10 +1,11 @@
-package com.mohamedmenasy.backbasetask.features.main.data;
+package com.mohamedmenasy.backbasetask.features.clitylist.data;
 
 import android.os.Handler;
 import android.os.HandlerThread;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mohamedmenasy.backbasetask.core.data.City;
 
 import java.io.IOException;
 import java.io.InputStream;

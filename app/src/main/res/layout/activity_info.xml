@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".features.about.AboutActivity">
+    android:layout_margin="16dp"
+    tools:context=".features.info.view.InfoActivity">
 
     <LinearLayout
+        android:id="@+id/infoContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/infoContainer"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,12 +23,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Company name: "/>
+                android:text="Id: " />
 
             <TextView
+                android:id="@+id/idTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/companyName"
                 tools:text="Backbase" />
 
         </LinearLayout>
@@ -41,12 +42,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Company address: "/>
+                android:text="County: " />
 
             <TextView
+                android:id="@+id/countyTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/companyAdress"
                 tools:text="Backbase" />
 
         </LinearLayout>
@@ -60,12 +61,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Company city: "/>
+                android:text="City: " />
 
             <TextView
+                android:id="@+id/cityTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/companyCity"
                 tools:text="Backbase" />
 
         </LinearLayout>
@@ -79,12 +80,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Company postal: "/>
+                android:text="Longitude: " />
 
             <TextView
+                android:id="@+id/longitudeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/companypostal"
                 tools:text="Backbase" />
 
         </LinearLayout>
@@ -98,33 +99,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About: "/>
+                android:text="Latitude: " />
 
             <TextView
+                android:id="@+id/latitudeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/aboutInfo"
                 tools:text="Backbase" />
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:id="@+id/progressBar"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Loading Failed"
-        android:visibility="gone"
-        style="@style/TextAppearance.AppCompat.Medium"
-        android:layout_centerInParent="true"
-        android:id="@+id/errorView"/>
-
 
 </RelativeLayout>

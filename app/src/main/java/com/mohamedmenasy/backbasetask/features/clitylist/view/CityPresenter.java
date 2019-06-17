@@ -1,11 +1,11 @@
-package com.mohamedmenasy.backbasetask.features.main.view;
+package com.mohamedmenasy.backbasetask.features.clitylist.view;
 
 import android.content.Context;
 
 import com.mohamedmenasy.backbasetask.R;
-import com.mohamedmenasy.backbasetask.features.main.data.City;
-import com.mohamedmenasy.backbasetask.features.main.data.LoadCitiesInteractor;
-import com.mohamedmenasy.backbasetask.features.main.data.SearchForCitiesInteractor;
+import com.mohamedmenasy.backbasetask.core.data.City;
+import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCitiesInteractor;
+import com.mohamedmenasy.backbasetask.features.clitylist.data.SearchForCitiesInteractor;
 import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 
 import java.util.List;

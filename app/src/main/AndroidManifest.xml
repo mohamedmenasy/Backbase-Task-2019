@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".features.about.AboutActivity" />
+        <activity android:name=".features.info.view.InfoActivity" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

@@ -38,7 +38,7 @@
 
         <fragment
             android:id="@+id/citiesfrag"
-            class="com.mohamedmenasy.backbasetask.features.main.view.CityFragment"
+            class="com.mohamedmenasy.backbasetask.features.clitylist.view.CityFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>

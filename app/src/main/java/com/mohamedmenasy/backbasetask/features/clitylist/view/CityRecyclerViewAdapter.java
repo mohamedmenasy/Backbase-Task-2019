@@ -1,4 +1,4 @@
-package com.mohamedmenasy.backbasetask.features.main.view;
+package com.mohamedmenasy.backbasetask.features.clitylist.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mohamedmenasy.backbasetask.R;
-import com.mohamedmenasy.backbasetask.features.main.data.City;
+import com.mohamedmenasy.backbasetask.core.data.City;
 
 import java.util.List;
 

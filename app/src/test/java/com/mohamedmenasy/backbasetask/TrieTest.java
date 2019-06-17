@@ -1,8 +1,8 @@
 package com.mohamedmenasy.backbasetask;
 
 import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
-import com.mohamedmenasy.backbasetask.features.main.data.City;
-import com.mohamedmenasy.backbasetask.features.main.data.Coord;
+import com.mohamedmenasy.backbasetask.core.data.City;
+import com.mohamedmenasy.backbasetask.core.data.Coord;
 
 import org.junit.After;
 import org.junit.Before;
@@ -128,6 +128,6 @@ public class TrieTest {
         trie.insert(albuquerqueCity.getName(), albuquerqueCity);
         trie.deleteKey(alabamaCity.getName());
         assertEquals(1, trie.size());
-        
+
     }
 }
