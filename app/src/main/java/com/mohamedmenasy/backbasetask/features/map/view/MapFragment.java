@@ -102,6 +102,8 @@ public class MapFragment extends Fragment {
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             mActionBar.setDisplayHomeAsUpEnabled(false);
             mActionBar.setDisplayShowHomeEnabled(false);
+            mActionBar.setTitle(R.string.app_name);
+
         }
     }
 
