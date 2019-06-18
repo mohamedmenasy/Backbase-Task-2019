@@ -37,7 +37,7 @@ public class InfoActivityTest {
     }
 
     @Test
-    public void testDataDisplayed() {
+    public void checkDataDisplayed() {
         onView(allOf(withId(R.id.idTV), withText("1")));
         onView(allOf(withId(R.id.countyTV), withText("EG")));
         onView(allOf(withId(R.id.cityTV), withText("Cairo")));

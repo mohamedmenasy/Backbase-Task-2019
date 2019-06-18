@@ -1,4 +1,4 @@
-package com.mohamedmenasy.backbasetask;
+package com.mohamedmenasy.backbasetask.data;
 
 import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 import com.mohamedmenasy.backbasetask.core.data.City;

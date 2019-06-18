@@ -48,7 +48,7 @@ public class AboutActivityTest {
     }
 
     @Test
-    public void testScreenDataDisplayed() {
+    public void checkDataDisplayed() {
 
         onView(allOf(withId(R.id.companyName), withText("Backbase")));
         onView(allOf(withId(R.id.companyAdress), withText("Jacob Bontiusplaats 9")));

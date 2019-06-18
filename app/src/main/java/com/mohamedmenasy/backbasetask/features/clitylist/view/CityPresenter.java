@@ -6,10 +6,10 @@ import androidx.annotation.Nullable;
 
 import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.core.data.City;
+import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCitiesInteractor;
 import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCityIdlingResource;
 import com.mohamedmenasy.backbasetask.features.clitylist.data.SearchForCitiesInteractor;
-import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 
 import java.util.List;
 
@@ -22,19 +22,18 @@ public class CityPresenter {
     private boolean isDataLoaded = false;
     private LoadCityIdlingResource mIdlingResource;
 
-    CityPresenter(Context context, CityView mainCityView,
-                  LoadCitiesInteractor loadCitiesInteractor,
-                  SearchForCitiesInteractor searchForCitiesInteractor,
-                  @Nullable LoadCityIdlingResource idlingResource) {
-
+    public CityPresenter(Context context, CityView mainCityView,
+                         LoadCitiesInteractor loadCitiesInteractor,
+                         SearchForCitiesInteractor searchForCitiesInteractor,
+                         @Nullable LoadCityIdlingResource idlingResource) {
+        this.context = context;
         this.mainCityView = mainCityView;
         this.loadCitiesInteractor = loadCitiesInteractor;
-        this.context = context;
         this.searchForCitiesInteractor = searchForCitiesInteractor;
         this.mIdlingResource = idlingResource;
     }
 
-    void onResume() {
+    public void onResume() {
         if (!isDataLoaded) {
             if (mainCityView != null) {
                 mainCityView.showProgress();
@@ -46,7 +45,7 @@ public class CityPresenter {
         }
     }
 
-    void onDestroy() {
+   public void onDestroy() {
         mainCityView = null;
     }
 

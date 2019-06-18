@@ -79,7 +79,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void performSearch() {
+    public void checkSearching() {
 
         onView(withId(R.id.searchET))
                 .perform(replaceText(SEARCH_KEYWORD_1), closeSoftKeyboard());
@@ -92,7 +92,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void navigateToInfoScreen() {
+    public void checkNavigationToInfoScreen() {
 
         onView(withId(R.id.searchET))
                 .perform(replaceText(SEARCH_KEYWORD_1), closeSoftKeyboard());
@@ -106,7 +106,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void navigateToMapScreen() {
+    public void checkNavigationToMapScreen() {
 
         onView(withId(R.id.searchET))
                 .perform(replaceText(SEARCH_KEYWORD_1), closeSoftKeyboard());
