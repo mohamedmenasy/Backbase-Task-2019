@@ -12,11 +12,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.IdlingResource;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,7 +31,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.core.data.City;
+import com.mohamedmenasy.backbasetask.core.view.MainActivity;
 import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCitiesInteractor;
+import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCityIdlingResource;
 import com.mohamedmenasy.backbasetask.features.clitylist.data.SearchForCitiesInteractor;
 import com.mohamedmenasy.backbasetask.features.info.view.InfoActivity;
 import com.mohamedmenasy.backbasetask.features.map.view.MapFragment;
@@ -41,6 +47,8 @@ public class CityFragment extends Fragment implements CityView {
     private CityPresenter presenter;
     private EditText searchET;
     private CityRecyclerViewAdapter adapter;
+    @Nullable
+    private LoadCityIdlingResource mIdlingResource;
 
     public CityFragment() {
     }
@@ -57,10 +65,19 @@ public class CityFragment extends Fragment implements CityView {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle(R.string.loading);
         progressDialog.setCancelable(false);
-        presenter = new CityPresenter(getActivity(), this, new LoadCitiesInteractor(), new SearchForCitiesInteractor());
+        mIdlingResource = getIdlingResource();
+        presenter = new CityPresenter(getActivity(),
+                this,
+                new LoadCitiesInteractor(),
+                new SearchForCitiesInteractor(),
+                mIdlingResource);
 
     }
-
+    @VisibleForTesting
+    @NonNull
+    public LoadCityIdlingResource getIdlingResource() {
+       return (LoadCityIdlingResource) ((MainActivity) getActivity()).getIdlingResource();
+    }
     @Override
     public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container,
                                           Bundle savedInstanceState) {
@@ -200,4 +217,6 @@ public class CityFragment extends Fragment implements CityView {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
     }
+
+
 }

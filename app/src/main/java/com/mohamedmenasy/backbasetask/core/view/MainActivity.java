@@ -5,13 +5,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.test.espresso.IdlingResource;
 
 import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.features.about.AboutActivity;
+import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCityIdlingResource;
 
 public class MainActivity extends AppCompatActivity {
+    @Nullable
+    private LoadCityIdlingResource mIdlingResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +46,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new LoadCityIdlingResource();
+        }
+        return mIdlingResource;
     }
 }

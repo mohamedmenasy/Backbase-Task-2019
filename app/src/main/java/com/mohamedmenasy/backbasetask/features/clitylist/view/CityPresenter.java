@@ -2,9 +2,12 @@ package com.mohamedmenasy.backbasetask.features.clitylist.view;
 
 import android.content.Context;
 
+import androidx.annotation.Nullable;
+
 import com.mohamedmenasy.backbasetask.R;
 import com.mohamedmenasy.backbasetask.core.data.City;
 import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCitiesInteractor;
+import com.mohamedmenasy.backbasetask.features.clitylist.data.LoadCityIdlingResource;
 import com.mohamedmenasy.backbasetask.features.clitylist.data.SearchForCitiesInteractor;
 import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 
@@ -17,18 +20,27 @@ public class CityPresenter {
     private Context context;
     private Trie<City> trie = new Trie<>();
     private boolean isDataLoaded = false;
+    private LoadCityIdlingResource mIdlingResource;
 
-    CityPresenter(Context context, CityView mainCityView, LoadCitiesInteractor loadCitiesInteractor, SearchForCitiesInteractor searchForCitiesInteractor) {
+    CityPresenter(Context context, CityView mainCityView,
+                  LoadCitiesInteractor loadCitiesInteractor,
+                  SearchForCitiesInteractor searchForCitiesInteractor,
+                  @Nullable LoadCityIdlingResource idlingResource) {
+
         this.mainCityView = mainCityView;
         this.loadCitiesInteractor = loadCitiesInteractor;
         this.context = context;
         this.searchForCitiesInteractor = searchForCitiesInteractor;
+        this.mIdlingResource = idlingResource;
     }
 
     void onResume() {
         if (!isDataLoaded) {
             if (mainCityView != null) {
                 mainCityView.showProgress();
+            }
+            if (mIdlingResource != null) {
+                mIdlingResource.setIdleState(false);
             }
             loadCitiesInteractor.loadItems(context.getResources().openRawResource(R.raw.cities), this::onFinished);
         }
@@ -45,6 +57,10 @@ public class CityPresenter {
             for (City c : items) {
                 trie.insert(c.getName(), c);
             }
+            if (mIdlingResource != null) {
+                mIdlingResource.setIdleState(true);
+            }
+
             mainCityView.hideProgress();
 
             isDataLoaded = true;
