@@ -5,6 +5,7 @@ import androidx.test.espresso.IdlingResource;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+// IdlingResource class to the load city (used for ui testing)
 public class LoadCityIdlingResource implements IdlingResource {
     @Nullable
     private volatile ResourceCallback mCallback;

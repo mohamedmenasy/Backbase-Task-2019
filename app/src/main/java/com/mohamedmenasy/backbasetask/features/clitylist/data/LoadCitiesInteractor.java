@@ -22,6 +22,7 @@ public class LoadCitiesInteractor {
 
         if (!handlerThread.isAlive())
             handlerThread.start();
+
         new Handler(handlerThread.getLooper()).post(() -> listener.onFinished(getListOfCities(stream)));
     }
 
@@ -29,8 +30,11 @@ public class LoadCitiesInteractor {
         ObjectMapper mapper = new ObjectMapper();
         List<City> cities = null;
         try {
+            //Load data from the json file using jackson ObjectMapper
             cities = mapper.readValue(stream, new TypeReference<List<City>>() {
             });
+
+            //sort thr data alphabetically
             Collections.sort(cities, (data1, data2) -> data1.getName().compareToIgnoreCase(data2.getName()));
         } catch (IOException e) {
             e.printStackTrace();

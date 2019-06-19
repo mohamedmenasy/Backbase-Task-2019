@@ -49,9 +49,6 @@ public class Coord implements Parcelable {
         dest.writeValue(this.lat);
     }
 
-    public Coord() {
-    }
-
     protected Coord(Parcel in) {
         this.lon = (Double) in.readValue(Double.class.getClassLoader());
         this.lat = (Double) in.readValue(Double.class.getClassLoader());

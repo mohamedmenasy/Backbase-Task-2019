@@ -19,7 +19,11 @@ public class City implements Parcelable {
     private Coord coord;
 
     @JsonCreator
-    public City(@JsonProperty("country") String country, @JsonProperty("name") String name, @JsonProperty("_id") Integer id, @JsonProperty("coord") Coord coord) {
+    public City(@JsonProperty("country") String country,
+                @JsonProperty("name") String name,
+                @JsonProperty("_id") Integer id,
+                @JsonProperty("coord") Coord coord) {
+
         this.country = country;
         this.name = name;
         this.id = id;

@@ -10,6 +10,4 @@ public interface CityView {
     void hideProgress();
 
     void setItems(List<City> items);
-
-    void showMessage(String message);
 }

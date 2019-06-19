@@ -45,7 +45,7 @@ public class CityPresenter {
         }
     }
 
-   public void onDestroy() {
+    public void onDestroy() {
         mainCityView = null;
     }
 

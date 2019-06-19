@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,11 +71,13 @@ public class CityFragment extends Fragment implements CityView {
                 mIdlingResource);
 
     }
+
     @VisibleForTesting
     @NonNull
     public LoadCityIdlingResource getIdlingResource() {
-       return (LoadCityIdlingResource) ((MainActivity) getActivity()).getIdlingResource();
+        return (LoadCityIdlingResource) ((MainActivity) getActivity()).getIdlingResource();
     }
+
     @Override
     public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container,
                                           Bundle savedInstanceState) {
@@ -85,8 +86,6 @@ public class CityFragment extends Fragment implements CityView {
         Context context = view.getContext();
         recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        //recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-
         searchET = view.findViewById(R.id.searchET);
         searchET.addTextChangedListener(filterTextWatcher);
 
@@ -140,13 +139,6 @@ public class CityFragment extends Fragment implements CityView {
 
     }
 
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-
-    }
-
-
     private TextWatcher filterTextWatcher = new TextWatcher() {
 
         @Override
@@ -165,7 +157,6 @@ public class CityFragment extends Fragment implements CityView {
         }
 
     };
-
 
     private void openMapFragment(City item) {
         hideKeyboard();
@@ -204,6 +195,7 @@ public class CityFragment extends Fragment implements CityView {
         intent.putExtra(InfoActivity.INTENT_KEY, item);
         getActivity().startActivity(intent);
 
+        //it is a good idea to display data on dialog
         /*new AlertDialog.Builder(getActivity())
                 .setTitle(item.getName() + ", " + item.getCountry())
                 .setMessage(item.toString())

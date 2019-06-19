@@ -10,7 +10,7 @@ import com.mohamedmenasy.backbasetask.core.data.City;
 
 
 public class InfoActivity extends AppCompatActivity {
-public static final String INTENT_KEY = "city_obj";
+    public static final String INTENT_KEY = "city_obj";
     private TextView countryID;
     private TextView countyName;
     private TextView cityName;
