@@ -35,6 +35,18 @@ Searching for a key is similar to insert operation, however, we only compare the
 
 Insert and search costs `O(key_length)`, however the memory requirements of Trie is `O(ALPHABET_SIZE * key_length * N)` where N is number of keys in Trie.
 
+## Running the app
+
+##### Using android studio
+
+Just import the project and hit `run` button.
+
+##### Using command line 
+
+```
+$ adb shell am start -n 'com.mohamedmenasy.backbasetask/com.mohamedmenasy.backbasetask.core.view.MainActivity'
+```
+
 ## Running the tests
 
 There are many test cases covers the testing of Trie implementation, presenters and ui test of all activities using espresso.
@@ -72,6 +84,10 @@ $ adb shell am instrument -w -r -e debug false -e class 'com.mohamedmenasy.backb
 ```
 $ adb shell am instrument -w -r -e debug false -e class 'com.mohamedmenasy.backbasetask.view.AboutActivityTest' com.mohamedmenasy.backbasetask.test/androidx.test.runner.AndroidJUnitRunner
 ```
+
+## Todo
+
+- Use [Ternary Search Tree](https://en.wikipedia.org/wiki/Ternary_search_tree) and test the performance.
 
 ## Author
 
