@@ -2,34 +2,33 @@ package com.mohamedmenasy.backbasetask.features.clitylist.data;
 
 import androidx.annotation.Nullable;
 import androidx.test.espresso.IdlingResource;
-
 import java.util.concurrent.atomic.AtomicBoolean;
 
 // IdlingResource class to the load city (used for ui testing)
 public class LoadCityIdlingResource implements IdlingResource {
-    @Nullable
-    private volatile ResourceCallback mCallback;
-    private AtomicBoolean mIsIdleNow = new AtomicBoolean(true);
+  @Nullable
+  private volatile ResourceCallback mCallback;
+  private AtomicBoolean mIsIdleNow = new AtomicBoolean(true);
 
-    @Override
-    public String getName() {
-        return this.getClass().getName();
-    }
+  @Override
+  public String getName() {
+    return this.getClass().getName();
+  }
 
-    @Override
-    public boolean isIdleNow() {
-        return mIsIdleNow.get();
-    }
+  @Override
+  public boolean isIdleNow() {
+    return mIsIdleNow.get();
+  }
 
-    @Override
-    public void registerIdleTransitionCallback(ResourceCallback callback) {
-        mCallback = callback;
-    }
+  @Override
+  public void registerIdleTransitionCallback(ResourceCallback callback) {
+    mCallback = callback;
+  }
 
-    public void setIdleState(boolean isIdleNow) {
-        mIsIdleNow.set(isIdleNow);
-        if (isIdleNow && mCallback != null) {
-            mCallback.onTransitionToIdle();
-        }
+  public void setIdleState(boolean isIdleNow) {
+    mIsIdleNow.set(isIdleNow);
+    if (isIdleNow && mCallback != null) {
+      mCallback.onTransitionToIdle();
     }
+  }
 }

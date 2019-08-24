@@ -7,33 +7,33 @@ package com.mohamedmenasy.backbasetask.features.about;
 
 public interface About {
 
-    interface Model {
-        void getAboutInfo();
-    }
+  interface Model {
+    void getAboutInfo();
+  }
 
-    interface Presenter {
-        void getAboutInfo();
+  interface Presenter {
+    void getAboutInfo();
 
-        void onSuccess(AboutInfo aboutInfo);
+    void onSuccess(AboutInfo aboutInfo);
 
-        void onFail();
-    }
+    void onFail();
+  }
 
-    interface View {
-        void setCompanyName(String companyName);
+  interface View {
+    void setCompanyName(String companyName);
 
-        void setCompanyAddress(String companyAddress);
+    void setCompanyAddress(String companyAddress);
 
-        void setCompanyPostalCode(String postalCode);
+    void setCompanyPostalCode(String postalCode);
 
-        void setCompanyCity(String companyCity);
+    void setCompanyCity(String companyCity);
 
-        void setAboutInfo(String info);
+    void setAboutInfo(String info);
 
-        void showError();
+    void showError();
 
-        void showProgress();
+    void showProgress();
 
-        void hideProgress();
-    }
+    void hideProgress();
+  }
 }

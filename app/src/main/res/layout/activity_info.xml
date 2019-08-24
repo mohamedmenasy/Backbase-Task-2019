@@ -3,112 +3,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="16dp"
-    tools:context=".features.info.view.InfoActivity">
+    android:orientation="vertical"
+    tools:context=".features.info.view.InfoActivity"
+    >
+
+  <LinearLayout
+      android:id="@+id/infoContainer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:visibility="gone"
+      >
 
     <LinearLayout
-        android:id="@+id/infoContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Id: " />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Id: "
+          />
 
-            <TextView
-                android:id="@+id/idTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Backbase" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="County: " />
-
-            <TextView
-                android:id="@+id/countyTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Backbase" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="City: " />
-
-            <TextView
-                android:id="@+id/cityTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Backbase" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Longitude: " />
-
-            <TextView
-                android:id="@+id/longitudeTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Backbase" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Latitude: " />
-
-            <TextView
-                android:id="@+id/latitudeTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Backbase" />
-
-        </LinearLayout>
+      <TextView
+          android:id="@+id/idTV"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="Backbase"
+          />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="County: "
+          />
+
+      <TextView
+          android:id="@+id/countyTV"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="Backbase"
+          />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="City: "
+          />
+
+      <TextView
+          android:id="@+id/cityTV"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="Backbase"
+          />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Longitude: "
+          />
+
+      <TextView
+          android:id="@+id/longitudeTV"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="Backbase"
+          />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Latitude: "
+          />
+
+      <TextView
+          android:id="@+id/latitudeTV"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="Backbase"
+          />
+
+    </LinearLayout>
+
+  </LinearLayout>
 
 </RelativeLayout>
