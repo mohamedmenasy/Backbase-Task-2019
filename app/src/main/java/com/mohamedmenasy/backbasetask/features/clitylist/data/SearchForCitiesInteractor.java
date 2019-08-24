@@ -2,6 +2,7 @@ package com.mohamedmenasy.backbasetask.features.clitylist.data;
 
 import android.os.Handler;
 
+import android.os.HandlerThread;
 import com.mohamedmenasy.backbasetask.core.data.City;
 import com.mohamedmenasy.backbasetask.core.model.trie.Trie;
 
@@ -13,7 +14,14 @@ public class SearchForCitiesInteractor {
     }
 
     public void findCities(Trie<City> trie, String keyword, final OnSearchFinishedListener listener) {
-        new Handler().post(() -> listener.onFinished(trieFind(trie, keyword)));
+
+        final HandlerThread handlerThread = new HandlerThread("HandlerThread");
+
+        if (!handlerThread.isAlive())
+            handlerThread.start();
+
+        new Handler(handlerThread.getLooper()).post(() -> listener.onFinished(trieFind(trie, keyword)));
+
     }
 
     private List<City> trieFind(Trie<City> trie, String keyword) {
